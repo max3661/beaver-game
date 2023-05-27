@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class Marching : MonoBehaviour {
 
@@ -18,16 +20,76 @@ public class Marching : MonoBehaviour {
     List<Vector3> vertices = new List<Vector3>();
     List<int> triangles = new List<int>();
 
-    private void Start() {
+    private string savePath; // Path to save the voxel data file
 
+    private void Awake() {
+        savePath = Application.persistentDataPath + "/voxelData.dat"; // Set the save path
+    }
+
+    private void Start()
+    {
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
         transform.tag = "Terrain";
-        terrainMap = new float[width + 1, height + 1, width + 1];
-        PopulateTerrainMap();
-        CreateMeshData();
 
+        if (File.Exists(savePath))
+        {
+            LoadTerrainData();
+        }
+        else
+        {
+            terrainMap = new float[width + 1, height + 1, width + 1];
+            PopulateTerrainMap();
+            CreateMeshData();
+            SaveTerrainData(); // Save initial terrain data
+        }
     }
+
+    void SaveTerrainData()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream fileStream = File.Create(savePath);
+
+        // Create a serializable object to hold the voxel data and any other necessary information
+        VoxelTerrainData voxelTerrainData = new VoxelTerrainData();
+        voxelTerrainData.width = width;
+        voxelTerrainData.height = height;
+        voxelTerrainData.terrainMap = terrainMap;
+
+        formatter.Serialize(fileStream, voxelTerrainData);
+        fileStream.Close();
+    }
+
+    void LoadTerrainData()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream fileStream = File.Open(savePath, FileMode.Open);
+
+        VoxelTerrainData voxelTerrainData = (VoxelTerrainData)formatter.Deserialize(fileStream);
+        fileStream.Close();
+
+        width = voxelTerrainData.width;
+        height = voxelTerrainData.height;
+        terrainMap = voxelTerrainData.terrainMap;
+
+        CreateMeshData();
+    }
+
+	public void OnDeleteSaveData()
+	{
+		if (File.Exists(savePath))
+		{
+			File.Delete(savePath);
+			Debug.Log("Save data deleted.");
+			PopulateTerrainMap();
+            CreateMeshData();
+            SaveTerrainData();
+		}
+		else
+		{
+			Debug.Log("No save data found.");
+		}
+	}
 
     void CreateMeshData() {
 
@@ -165,7 +227,7 @@ public class Marching : MonoBehaviour {
         Vector3Int v3Int = new Vector3Int(Mathf.CeilToInt(pos.x), Mathf.CeilToInt(pos.y), Mathf.CeilToInt(pos.z));
         terrainMap[v3Int.x, v3Int.y, v3Int.z] = 0f;
         CreateMeshData();
-
+		SaveTerrainData();
     }
 
     public void RemoveTerrain (Vector3 pos) {
@@ -173,8 +235,16 @@ public class Marching : MonoBehaviour {
         Vector3Int v3Int = new Vector3Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
         terrainMap[v3Int.x, v3Int.y, v3Int.z] = 1f;
         CreateMeshData();
-
+		SaveTerrainData();
     }
+
+	[System.Serializable]
+    class VoxelTerrainData {
+        public int width;
+        public int height;
+        public float[,,] terrainMap;
+    }
+
 
     float SampleTerrain (Vector3Int point) {
 

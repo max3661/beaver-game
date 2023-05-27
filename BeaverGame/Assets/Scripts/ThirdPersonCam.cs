@@ -9,13 +9,15 @@ public class ThirdPersonCam : MonoBehaviour
     public Transform player;
     public Transform playerObj;
     public Rigidbody rb;
+    public GameObject canvasObj;
 
     public float rotationSpeed;
+    bool gamePaused;
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     private void Update()
@@ -31,6 +33,21 @@ public class ThirdPersonCam : MonoBehaviour
 
         if (inputDir != Vector3.zero)
             playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+
+        //Reading input for ESCAPE key, and by saying gamePaused = !gamePaused, we switch the bool on and off each time the Keycode is registered!
+        if(Input.GetKeyDown(KeyCode.Escape))
+            gamePaused = !gamePaused;
         
+        //Now we enable and disable the game object!
+        if(gamePaused) {
+            canvasObj.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else {
+            canvasObj.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }      
     }
 }
