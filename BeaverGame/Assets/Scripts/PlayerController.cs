@@ -6,7 +6,6 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public Camera cam;
 
     public float moveSpeed;
 
@@ -59,33 +58,6 @@ public class PlayerController : MonoBehaviour
         else
             rb.drag = 0;
 
-        if (Input.GetMouseButtonDown(0)) {
-
-            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 1f));
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit)) {
-
-                if (hit.transform.tag == "Terrain")
-                    hit.transform.GetComponent<Marching>().PlaceTerrain(hit.point);
-                
-            }
-
-        }
-
-        if (Input.GetMouseButtonDown(1)) {
-
-            Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 1f));
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit)) {
-
-                if (hit.transform.tag == "Terrain")
-                    hit.transform.GetComponent<Marching>().RemoveTerrain(hit.point);
-                
-            }
-
-        }
     }
 
     private void FixedUpdate()
