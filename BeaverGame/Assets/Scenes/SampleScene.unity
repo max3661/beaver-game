@@ -1693,8 +1693,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300590922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26, y: 6, z: 32}
-  m_LocalScale: {x: 8, y: 1, z: 8}
+  m_LocalPosition: {x: 15, y: 6.5, z: 14}
+  m_LocalScale: {x: 4, y: 1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoiseShader: {fileID: 7200000, guid: 7b48c57ec1ff3b34c919dcdd80d13227, type: 3}
   noiseScale: 1
-  amplitude: 8
+  amplitude: 10
   frequency: 0.02
   octaves: 8
   groundPercent: 0.2
@@ -2239,7 +2239,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825072727}
-  m_LocalRotation: {x: 0.09252096, y: -0.000000004283145, z: 3.9798778e-10, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252096, y: 0.0000000042831445, z: -3.9798773e-10, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

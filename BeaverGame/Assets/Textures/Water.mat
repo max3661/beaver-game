@@ -88,14 +88,14 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RippleDensity: 6
+    - _RippleDensity: 9
     - _RippleSpeed: 0.5
-    - _RippleStrength: 5
+    - _RippleStrength: 7
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaveSpeed: 0.15
+    - _WaveSpeed: 0.1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0.06403971, b: 1, a: 1}
