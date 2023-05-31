@@ -1038,7 +1038,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.047631916, y: 0.0000000056840164, z: -2.7104824e-10, w: 0.99886495}
+  m_LocalRotation: {x: 0.047631916, y: -0.0000000056840164, z: 2.7104824e-10, w: 0.99886495}
   m_LocalPosition: {x: 5.7611837, y: 14.528512, z: 11.780664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1374,7 +1374,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986195166}
-  m_LocalRotation: {x: 0.047631912, y: 0.0000000042967128, z: -2.0489323e-10, w: 0.99886495}
+  m_LocalRotation: {x: 0.047631912, y: -0.0000000042967128, z: 2.0489323e-10, w: 0.99886495}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1658,6 +1658,8 @@ GameObject:
   - component: {fileID: 1300590925}
   - component: {fileID: 1300590924}
   - component: {fileID: 1300590923}
+  - component: {fileID: 1300590927}
+  - component: {fileID: 1300590928}
   m_Layer: 0
   m_Name: WaterLevel
   m_TagString: Untagged
@@ -1673,10 +1675,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300590922}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1300590924
@@ -1744,6 +1746,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1300590927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300590922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770a65ff8e42ac24f82fe32e389ff16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &1300590928
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300590922}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: -2.5, z: 0}
 --- !u!1 &1349026031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,7 +2285,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825072727}
-  m_LocalRotation: {x: 0.09252096, y: -0.000000004283145, z: 3.9798778e-10, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252096, y: 0.0000000042831445, z: -3.9798773e-10, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
