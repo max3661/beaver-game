@@ -36,6 +36,8 @@ public class ThirdPersonCam : MonoBehaviour
         if (inputDir != Vector3.zero)
             playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
 
+
+        /*
         //Reading input for ESCAPE key, and by saying gamePaused = !gamePaused, we switch the bool on and off each time the Keycode is registered!
         if(Input.GetKeyDown(KeyCode.Escape))
             gamePaused = !gamePaused;
@@ -61,6 +63,6 @@ public class ThirdPersonCam : MonoBehaviour
             cinemachineFL.m_XAxis.m_MaxSpeed = 300f;
             cinemachineFL.m_YAxis.m_MaxSpeed = 2f;
             rotationSpeed = 7;
-        }
+        } */
     }
 }

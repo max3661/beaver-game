@@ -26,11 +26,6 @@ public class TerraformingCamera : MonoBehaviour
 			Terraform(false);
 			}
 		}
-		else if(canvasObj.activeInHierarchy) {
-			Debug.Log("Terraforming disabled");
-		}
-
-
 	}
 
 	private void Terraform(bool add) {
