@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ThirdPersonCam : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ThirdPersonCam : MonoBehaviour
     public Transform playerObj;
     public Rigidbody rb;
     public GameObject canvasObj;
+    public CinemachineFreeLook cinemachineFL;
 
     public float rotationSpeed;
     bool gamePaused;
@@ -48,6 +50,15 @@ public class ThirdPersonCam : MonoBehaviour
             canvasObj.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-        }      
+        }   
+
+        if (canvasObj.activeInHierarchy) {   
+            cinemachineFL.m_XAxis.m_MaxSpeed = 0.0f;
+            cinemachineFL.m_YAxis.m_MaxSpeed = 0.0f;          
+        }   
+        else {
+            cinemachineFL.m_XAxis.m_MaxSpeed = 300f;
+            cinemachineFL.m_YAxis.m_MaxSpeed = 2f;
+        }
     }
 }
