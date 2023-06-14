@@ -9,17 +9,28 @@ public class TerraformingCamera : MonoBehaviour
 
 	public float BrushSize = 2f;
 
+	public GameObject canvasObj;
+
 	private void Awake() {
 		_cam = GetComponent<Camera>();
 	}
 
 	private void LateUpdate() {
-		if (Input.GetMouseButton(0)) {
-			Terraform(true);
-		}
-		else if (Input.GetMouseButton(1)) {
+
+		// only allow terraforming if game is not paused, aka the canvas object is hidden
+		if(!canvasObj.activeInHierarchy) {
+			if (Input.GetMouseButton(0)) {
+				Terraform(true);
+			}
+			else if (Input.GetMouseButton(1)) {
 			Terraform(false);
+			}
 		}
+		else if(canvasObj.activeInHierarchy) {
+			Debug.Log("Terraforming disabled");
+		}
+
+
 	}
 
 	private void Terraform(bool add) {
