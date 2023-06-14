@@ -54,11 +54,13 @@ public class ThirdPersonCam : MonoBehaviour
 
         if (canvasObj.activeInHierarchy) {   
             cinemachineFL.m_XAxis.m_MaxSpeed = 0.0f;
-            cinemachineFL.m_YAxis.m_MaxSpeed = 0.0f;          
+            cinemachineFL.m_YAxis.m_MaxSpeed = 0.0f; 
+            rotationSpeed = 0;         
         }   
         else {
             cinemachineFL.m_XAxis.m_MaxSpeed = 300f;
             cinemachineFL.m_YAxis.m_MaxSpeed = 2f;
+            rotationSpeed = 7;
         }
     }
 }

@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public float airMultiplier;
     public bool readyToJump;
 
+    public GameObject canvasObj;
+
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
 
@@ -49,8 +51,14 @@ public class PlayerController : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
-        MyInput();
-        SpeedControl();
+        if(!canvasObj.activeInHierarchy) {
+            MyInput();
+            SpeedControl();
+        }
+        else if(canvasObj.activeInHierarchy) {
+			Debug.Log("Movement disabled");
+		}
+
 
         // handle drag
         if (grounded)
