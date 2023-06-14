@@ -1112,6 +1112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BrushSize: 2
+  canvasObj: {fileID: 1176006268}
 --- !u!1 &968180057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1298,7 @@ MonoBehaviour:
   jumpCooldown: 0.25
   airMultiplier: 0.4
   readyToJump: 0
+  canvasObj: {fileID: 1176006268}
   walkSpeed: 0
   sprintSpeed: 0
   jumpKey: 32
