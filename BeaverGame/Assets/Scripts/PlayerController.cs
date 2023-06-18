@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     public float swimmingMultiplier; 
+    public float dampingFactor = 0.95f;
     public bool readyToJump;
     
     [HideInInspector] public float walkSpeed;
@@ -76,6 +77,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        if(isSwimming)
+            rb.velocity *= dampingFactor;
     }
 
     private void MyInput()
