@@ -448,6 +448,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 184977063839468979, guid: e62f68f2b41aceb4f918b4e1886f4d6f, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 184977063839468980, guid: e62f68f2b41aceb4f918b4e1886f4d6f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1538,10 +1542,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  isSwimming: 0
   groundDrag: 5
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  swimmingMultiplier: 1
+  dampingFactor: 0.95
   readyToJump: 0
   walkSpeed: 0
   sprintSpeed: 0
@@ -2015,6 +2022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770a65ff8e42ac24f82fe32e389ff16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myPlayer: {fileID: 983462364}
 --- !u!65 &1300590928
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2059,7 +2067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoiseShader: {fileID: 7200000, guid: 7b48c57ec1ff3b34c919dcdd80d13227, type: 3}
   noiseScale: 1
-  amplitude: 10
+  amplitude: 6
   frequency: 0.02
   octaves: 8
   groundPercent: 0.2
@@ -2599,6 +2607,18 @@ MonoBehaviour:
       - m_Target: {fileID: 968180063}
         m_TargetAssemblyTypeName: Chunk, Assembly-CSharp
         m_MethodName: DeleteAndRegenerateTerrain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 963194231}
+        m_TargetAssemblyTypeName: TerraformingCamera, Assembly-CSharp
+        m_MethodName: DeleteSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
