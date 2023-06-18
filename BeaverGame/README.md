@@ -16,4 +16,9 @@ For the design patterns in our game, specific instances are commented directly i
   * Strategy design pattern (Behavioral):
     * MarchingCubes.compute (entire computeshader) 
     
-  
+  * Game Controls:
+   
+    * WASD for basic movement
+    * Space for Jump
+    * Left-click while looking at the terrain to add terrain
+    * Right-click while looking at the terrain to remove terrain
