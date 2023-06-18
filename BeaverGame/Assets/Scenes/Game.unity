@@ -1547,7 +1547,7 @@ MonoBehaviour:
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.4
-  swimmingMultiplier: 2
+  swimmingMultiplier: 0
   readyToJump: 0
   walkSpeed: 0
   sprintSpeed: 0
@@ -1647,7 +1647,7 @@ GameObject:
   - component: {fileID: 1495109093}
   - component: {fileID: 1495109092}
   m_Layer: 0
-  m_Name: 
+  m_Name: AnimationStateController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2021,6 +2021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770a65ff8e42ac24f82fe32e389ff16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animationController: {fileID: 1495109092}
   myPlayer: {fileID: 983462364}
 --- !u!65 &1300590928
 BoxCollider:
@@ -2358,6 +2359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebaf7b6de8dbc5c48a98e0ac2d3839ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSwimming: 0
 --- !u!4 &1495109093
 Transform:
   m_ObjectHideFlags: 0
@@ -3382,6 +3384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebaf7b6de8dbc5c48a98e0ac2d3839ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSwimming: 0
 --- !u!1 &2092228888
 GameObject:
   m_ObjectHideFlags: 0
