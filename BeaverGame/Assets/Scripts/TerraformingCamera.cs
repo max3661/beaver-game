@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
 
 public class TerraformingCamera : MonoBehaviour
 {
@@ -10,7 +12,16 @@ public class TerraformingCamera : MonoBehaviour
 
 	public float BrushSize = 2f;
 
+	// another runtime variable for add "cost" to the terraforming
+	public int score = 100; 
+
+	private const string ScoreKey = "Score";
+
+	private bool isTerraforming = false; 
+
 	public GameObject canvasObj;
+
+	public TMP_Text textComponent;
 
 	// Reference to the player character transform
     public Transform playerTransform;
@@ -22,11 +33,33 @@ public class TerraformingCamera : MonoBehaviour
 		_cam = GetComponent<Camera>();
 	}
 
+    void Start()
+    {
+        LoadScore();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0) && isTerraforming == true) // Check if the left mouse button (mouse button 0) is pressed
+        {
+            if (score > 0)
+            {
+                score--; // Subtract from the score variable
+            }
+        }
+        else if (Input.GetMouseButton(1) && isTerraforming == true) // Check if the right mouse button (mouse button 1) is pressed
+        {
+            score++; // Add to the score variable
+        }
+
+        textComponent.text = "Score: " + score.ToString();
+    }
+
 	private void LateUpdate() {
 
 		// only allow terraforming if game is not paused, aka the canvas object is hidden
 		if(!canvasObj.activeInHierarchy) {
-			if (Input.GetMouseButton(0)) {
+			if (Input.GetMouseButton(0) && score != 0) {
 				Terraform(true);
 			}
 			else if (Input.GetMouseButton(1)) {
@@ -40,6 +73,8 @@ public class TerraformingCamera : MonoBehaviour
 
 		if (Physics.Raycast(_cam.ScreenPointToRay(Input.mousePosition), out hit, 1000)) {
 			Chunk hitChunk = hit.collider.gameObject.GetComponent<Chunk>();
+
+			isTerraforming = true;
 
 			_hitPoint = hit.point;
 
@@ -55,6 +90,9 @@ public class TerraformingCamera : MonoBehaviour
 				StartCoroutine(AdjustPlayerPosition());
 			}
 			
+		}
+		else {
+			isTerraforming = false; 
 		}
 	}
 
@@ -106,5 +144,19 @@ public class TerraformingCamera : MonoBehaviour
         }
 
         return terrainHeight;
+    }
+
+	public void SaveScore()
+    {
+        PlayerPrefs.SetInt(ScoreKey, score);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadScore()
+    {
+        if (PlayerPrefs.HasKey(ScoreKey))
+        {
+            score = PlayerPrefs.GetInt(ScoreKey);
+        }
     }
 }

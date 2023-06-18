@@ -29,6 +29,8 @@ public class Chunk : MonoBehaviour
         public static int SizeOf => sizeof(float) * 3 * 3;
     }
 
+
+    // runtime variable keeping track of terrain mesh data 
     float[] _weights;
 
     private void Start()
@@ -36,7 +38,8 @@ public class Chunk : MonoBehaviour
         LoadTerrainData();
         Create();
     }
-
+    
+    // this void is causing the "SendMessage cannot be called ..." alert, this void is just there to provide the LOD slider during development and will removed with the eventual chunk system 
     private void OnValidate()
     {
         if (Application.isPlaying)
