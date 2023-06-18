@@ -496,6 +496,14 @@ PrefabInstance:
       propertyPath: m_CullingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 184977063839468982, guid: e62f68f2b41aceb4f918b4e1886f4d6f, type: 3}
+      propertyPath: m_Radius
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 184977063839468982, guid: e62f68f2b41aceb4f918b4e1886f4d6f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.29
+      objectReference: {fileID: 0}
     - target: {fileID: 2212317785013038114, guid: e62f68f2b41aceb4f918b4e1886f4d6f, type: 3}
       propertyPath: m_Layer
       value: 2
