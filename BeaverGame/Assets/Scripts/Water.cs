@@ -1,8 +1,12 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Water : MonoBehaviour
 {
     public AnimationStateController animationController;
+
+    public PlayerController myPlayer; 
 
     private void OnTriggerEnter(Collider other)
     {
@@ -10,6 +14,7 @@ public class Water : MonoBehaviour
         {
             Debug.Log("Player entered Water");
             animationController.isSwimming = true;
+            myPlayer.isSwimming = true;
         }
     }
 
@@ -19,6 +24,7 @@ public class Water : MonoBehaviour
         {
             Debug.Log("Player exited water");
             animationController.isSwimming = false;
+            myPlayer.isSwimming = false;
         }
     }
 }
