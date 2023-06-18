@@ -1,6 +1,10 @@
 ﻿#pragma kernel March
 #pragma kernel UpdateWeights
 
+//example of data parallelism (concurrency pattern) as our Marchingshader compute shader is using several threads to efficiently handle all necessary calculations 
+
+//example of the strategy design pattern (behavioral pattern) as it encapsulates the marching cubes algorithm 
+
 #include "Includes\MarchingTable.hlsl"
 
 #include "Includes\MetricsCompute.compute"

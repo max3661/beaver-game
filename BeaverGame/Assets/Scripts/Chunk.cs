@@ -29,6 +29,8 @@ public class Chunk : MonoBehaviour
         public static int SizeOf => sizeof(float) * 3 * 3;
     }
 
+
+    // runtime variable keeping track of terrain mesh data 
     float[] _weights;
 
     private void Start()
@@ -36,7 +38,8 @@ public class Chunk : MonoBehaviour
         LoadTerrainData();
         Create();
     }
-
+    
+    // this void is causing the "SendMessage cannot be called ..." alert, this void is just there to provide the LOD slider during development and will removed with the eventual chunk system 
     private void OnValidate()
     {
         if (Application.isPlaying)
@@ -49,7 +52,8 @@ public class Chunk : MonoBehaviour
     {
         CreateBuffers();
         if (_weights == null)
-        {
+        {   
+            //example of pipes and filters design pattern, the complex problem of terrain generation is split into multiple processes such as NoiseGeneration script and its compute shader
             _weights = NoiseGenerator.GetNoise(GridMetrics.LastLod);
         }
 
@@ -67,6 +71,7 @@ public class Chunk : MonoBehaviour
     public void EditWeights(Vector3 hitPosition, float brushSize, bool add)
     {
         CreateBuffers();
+        //example of pipes and filters design pattern, the complex problem of terrain generation is split into multiple processes such as passing information from this script and gridmetrics, which is then passed onto MarchingShader for the "heavy duty" computing
         int kernel = MarchingShader.FindKernel("UpdateWeights");
 
         _weightsBuffer.SetData(_weights);
