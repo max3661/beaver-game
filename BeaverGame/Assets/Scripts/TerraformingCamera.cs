@@ -40,14 +40,14 @@ public class TerraformingCamera : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && isTerraforming == true) // Check if the left mouse button (mouse button 0) is pressed
+        if (Input.GetMouseButton(0) && isTerraforming == true && !canvasObj.activeInHierarchy) // Check if the left mouse button (mouse button 0) is pressed
         {
             if (score > 0)
             {
                 score--; // Subtract from the score variable
             }
         }
-        else if (Input.GetMouseButton(1) && isTerraforming == true) // Check if the right mouse button (mouse button 1) is pressed
+        else if (Input.GetMouseButton(1) && isTerraforming == true && !canvasObj.activeInHierarchy) // Check if the right mouse button (mouse button 1) is pressed
         {
             score++; // Add to the score variable
         }
@@ -157,6 +157,15 @@ public class TerraformingCamera : MonoBehaviour
         if (PlayerPrefs.HasKey(ScoreKey))
         {
             score = PlayerPrefs.GetInt(ScoreKey);
+        }
+    }
+
+    public void DeleteSave()
+    {
+        if (PlayerPrefs.HasKey(ScoreKey))
+        {
+            PlayerPrefs.DeleteKey(ScoreKey);
+            score = 100;
         }
     }
 }
