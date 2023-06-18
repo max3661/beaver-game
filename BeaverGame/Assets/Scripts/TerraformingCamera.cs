@@ -52,7 +52,7 @@ public class TerraformingCamera : MonoBehaviour
             score++; // Add to the score variable
         }
 
-        textComponent.text = "Score: " + score.ToString();
+        textComponent.text = "Resources: " + score.ToString();
     }
 
 	private void LateUpdate() {
