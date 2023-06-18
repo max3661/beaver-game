@@ -16,6 +16,7 @@ public class AnimationStateController : MonoBehaviour
     void Update()
     {
         bool isWalking = animator.GetBool("isWalking");
+        bool isSwimming = animator.GetBool("isSwimming");
         bool pressedMovementKey = Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("up") || Input.GetKey("down") || Input.GetKey("left") || Input.GetKey("right");
 
         //if player presses w key
@@ -32,5 +33,14 @@ public class AnimationStateController : MonoBehaviour
             animator.SetBool("isWalking", false);
 
         }
+
+        //swimming
+        if (!isSwimming) {
+            animator.SetBool("isSwimming", true);
+        }
+        if (isSwimming) {
+            animator.SetBool("isSwimming", false);
+        }
+
     }
 }
