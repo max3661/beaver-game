@@ -1,4 +1,6 @@
 ﻿public static class GridMetrics {
+
+    //example of data parallelism (concurency pattern) as our Marchingshader compute shader is using several threads to efficiently handle all necessary calculations 
     public const int NumThreads = 8;
 
     public const int Scale = 32;

@@ -52,7 +52,8 @@ public class Chunk : MonoBehaviour
     {
         CreateBuffers();
         if (_weights == null)
-        {
+        {   
+            //example of pipes and filters design pattern, the complex problem of terrain generation is split into multiple processes such as NoiseGeneration script and its compute shader
             _weights = NoiseGenerator.GetNoise(GridMetrics.LastLod);
         }
 
@@ -70,6 +71,7 @@ public class Chunk : MonoBehaviour
     public void EditWeights(Vector3 hitPosition, float brushSize, bool add)
     {
         CreateBuffers();
+        //example of pipes and filters design pattern, the complex problem of terrain generation is split into multiple processes such as passing information from this script and gridmetrics, which is then passed onto MarchingShader for the "heavy duty" computing
         int kernel = MarchingShader.FindKernel("UpdateWeights");
 
         _weightsBuffer.SetData(_weights);
