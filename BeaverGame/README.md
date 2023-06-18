@@ -1,4 +1,19 @@
 # README 
+Congrats! You found our Beaver Game Prototype :)
+Have fun being a beaver and playing this casual game.
+
+
+  * Game Controls:
+
+    * WASD for basic movement
+    * Space for Jump
+    * Left-click while looking at the terrain to add terrain
+    * Right-click while looking at the terrain to remove terrain
+    
+
+***
+## For Grading
+DESIGN PATTERNS
 
 For the design patterns in our game, specific instances are commented directly into the code but as our project is a little complex I thought it would be good to provide a short overview: 
 
@@ -14,11 +29,14 @@ For the design patterns in our game, specific instances are commented directly i
 
 
   * Strategy design pattern (Behavioral):
-    * MarchingCubes.compute (entire computeshader) 
+    * MarchingCubes.compute (entire computeshader)
+
+***
+## Contributors
+
+| Name | Email |
+| ---- | ----- |
+| Maximilian Wagner | m.wagner@student.xu-university.de |
+| Miriam Geukes | m.geukes@student.xu-university.de |
     
-  * Game Controls:
-   
-    * WASD for basic movement
-    * Space for Jump
-    * Left-click while looking at the terrain to add terrain
-    * Right-click while looking at the terrain to remove terrain
+
