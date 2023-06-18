@@ -81,7 +81,7 @@ public class TerraformingCamera : MonoBehaviour
 			hitChunk.EditWeights(_hitPoint, BrushSize, add);
 
 			// logic process to ensure player is always ontop of the terrain mesh even when terraforming directly below the players feet
-			float range = 0.5f * BrushSize;
+			float range = 1f * BrushSize;
 			Vector2 playerPosition2D = new Vector2(playerTransform.position.x, playerTransform.position.z);
 			Vector2 hitPoint2D = new Vector2(_hitPoint.x, _hitPoint.z);
 			float distance = Vector2.Distance(playerPosition2D, hitPoint2D);
@@ -133,7 +133,7 @@ public class TerraformingCamera : MonoBehaviour
         float terrainHeight = float.MinValue;
 
         // Find the highest terrain height within a small radius around the player's position
-        float radius = 1.5f * BrushSize; // Adjust this value as needed
+        float radius = 2f * BrushSize; // Adjust this value as needed
         foreach (Vector3 vertex in vertices)
         {
             float distance = Vector2.Distance(new Vector2(playerPosition.x, playerPosition.z), new Vector2(vertex.x, vertex.z));
