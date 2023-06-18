@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TerraformingCamera : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class TerraformingCamera : MonoBehaviour
 	public float BrushSize = 2f;
 
 	public GameObject canvasObj;
+
+	// Reference to the player character transform
+    public Transform playerTransform;
+
+    // Reference to the terrain mesh
+    public MeshFilter terrainMeshFilter;
 
 	private void Awake() {
 		_cam = GetComponent<Camera>();
@@ -37,6 +44,17 @@ public class TerraformingCamera : MonoBehaviour
 			_hitPoint = hit.point;
 
 			hitChunk.EditWeights(_hitPoint, BrushSize, add);
+
+			// logic process to ensure player is always ontop of the terrain mesh even when terraforming directly below the players feet
+			float range = 0.5f * BrushSize;
+			Vector2 playerPosition2D = new Vector2(playerTransform.position.x, playerTransform.position.z);
+			Vector2 hitPoint2D = new Vector2(_hitPoint.x, _hitPoint.z);
+			float distance = Vector2.Distance(playerPosition2D, hitPoint2D);
+			if (distance <= range && add == true)
+			{
+				StartCoroutine(AdjustPlayerPosition());
+			}
+			
 		}
 	}
 
@@ -44,4 +62,49 @@ public class TerraformingCamera : MonoBehaviour
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(_hitPoint, BrushSize);
 	}
+
+    private IEnumerator AdjustPlayerPosition()
+    {
+        Vector3 playerPosition = playerTransform.position;
+
+        // Get the height of the modified terrain at the player's position
+        float terrainHeight = GetTerrainHeightAtPlayerPosition();
+
+        // Calculate the difference in height between player and terrain
+        float heightDifference = terrainHeight - playerPosition.y;
+
+        // Adjust the player's position until they are above the modified terrain
+        const float adjustmentSpeed = 8f;
+        float targetHeight = playerPosition.y + heightDifference;
+        while (playerPosition.y < targetHeight)
+        {
+            playerPosition.y += adjustmentSpeed * Time.deltaTime;
+            playerTransform.position = playerPosition;
+            yield return null;
+        }
+
+        // Ensure the player is precisely positioned on top of the modified terrain
+        playerPosition.y = targetHeight;
+        playerTransform.position = playerPosition;
+    }
+
+    private float GetTerrainHeightAtPlayerPosition()
+    {
+        Vector3 playerPosition = playerTransform.position;
+        Vector3[] vertices = terrainMeshFilter.mesh.vertices;
+        float terrainHeight = float.MinValue;
+
+        // Find the highest terrain height within a small radius around the player's position
+        float radius = 1.5f * BrushSize; // Adjust this value as needed
+        foreach (Vector3 vertex in vertices)
+        {
+            float distance = Vector2.Distance(new Vector2(playerPosition.x, playerPosition.z), new Vector2(vertex.x, vertex.z));
+            if (distance <= radius && vertex.y > terrainHeight)
+            {
+                terrainHeight = vertex.y;
+            }
+        }
+
+        return terrainHeight;
+    }
 }
