@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ThirdPersonCam : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ThirdPersonCam : MonoBehaviour
     public Transform playerObj;
     public Rigidbody rb;
     public GameObject canvasObj;
+    public CinemachineFreeLook cinemachineFL;
 
     public float rotationSpeed;
     bool gamePaused;
@@ -34,6 +36,8 @@ public class ThirdPersonCam : MonoBehaviour
         if (inputDir != Vector3.zero)
             playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
 
+
+        /*
         //Reading input for ESCAPE key, and by saying gamePaused = !gamePaused, we switch the bool on and off each time the Keycode is registered!
         if(Input.GetKeyDown(KeyCode.Escape))
             gamePaused = !gamePaused;
@@ -48,6 +52,17 @@ public class ThirdPersonCam : MonoBehaviour
             canvasObj.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-        }      
+        }   
+
+        if (canvasObj.activeInHierarchy) {   
+            cinemachineFL.m_XAxis.m_MaxSpeed = 0.0f;
+            cinemachineFL.m_YAxis.m_MaxSpeed = 0.0f; 
+            rotationSpeed = 0;         
+        }   
+        else {
+            cinemachineFL.m_XAxis.m_MaxSpeed = 300f;
+            cinemachineFL.m_YAxis.m_MaxSpeed = 2f;
+            rotationSpeed = 7;
+        } */
     }
 }
