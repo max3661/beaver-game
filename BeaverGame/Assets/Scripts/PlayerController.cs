@@ -9,13 +9,17 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed;
 
+    public bool isSwimming;
+
     public float groundDrag;
 
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public float swimmingMultiplier; 
+    public float dampingFactor = 0.95f;
     public bool readyToJump;
-
+    
     [HideInInspector] public float walkSpeed;
     [HideInInspector] public float sprintSpeed;
 
@@ -42,6 +46,8 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+
+        isSwimming = false; 
     }
 
     private void Update()
@@ -58,11 +64,21 @@ public class PlayerController : MonoBehaviour
         else
             rb.drag = 0;
 
+        if (isSwimming == true)
+        {
+            Physics.gravity = new Vector3(0, -1f, 0); // Reverse gravity
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0, -9.81f, 0); // Default gravity
+        }
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
+        if(isSwimming)
+            rb.velocity *= dampingFactor;
     }
 
     private void MyInput()
@@ -89,6 +105,11 @@ public class PlayerController : MonoBehaviour
         // on ground
         if(grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        if(isSwimming) {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * swimmingMultiplier, ForceMode.Force);
+        }
 
         // in air
         else if(!grounded)
